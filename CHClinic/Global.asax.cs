@@ -16,6 +16,10 @@ namespace CHClinic
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            using (var db= new CHClinic.Models.ClinicDBContext())
+            {
+                db.SaveChanges();
+            }
         }
     }
 }
