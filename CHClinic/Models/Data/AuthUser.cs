@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CHClinic.Models.Data
 {
-    class AuthUser
+    public class AuthUser
     {
         public int AuthUserId { get; set; }
-       
+
         [Index(IsUnique = true)]
         [StringLength(20)]
         public string Username { get; set; }
@@ -19,9 +19,9 @@ namespace CHClinic.Models.Data
         public int IsEnabled { get; set; }
     }
 
-    class AuthUserInfo
+    public class AuthUserInfo
     {
-        public int AuthUserInfoId {get;set;}
+        public int AuthUserInfoId { get; set; }
         public int UserID { get; set; }
         public DateTime LoggedOn { get; set; }
     }

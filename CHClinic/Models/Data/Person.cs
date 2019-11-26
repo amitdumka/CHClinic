@@ -6,45 +6,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CHClinic.Models.Data
 {
+    public enum Genders { Male, Female, Transgender }
 
-    class OPDReg
+    public class Person
     {
-        public OPDReg()
+        public Person()
         {
-            People = new HashSet<Person>();
             Visits = new HashSet<Visit>();
-            PrescribedMeds = new HashSet<PrescribedMed>();
-            Invoices = new HashSet<Invoice>();
+            //  PrescribedMeds = new HashSet<PrescribedMed>();
+            // Invoices = new HashSet<Invoice>();
             Histories = new HashSet<History>();
             Complaints = new HashSet<Complaint>();
             PhyicalExaminations = new HashSet<PhyicalExamination>();
             Generalities = new HashSet<Generalities>();
         }
 
-        public int OPDRegId { get; set; }
-        public DateTime? DateOfRecord { get; set; }
-
-        [Timestamp]
-        public Byte[] TimeStamp { get; set; }
-
-        public virtual ICollection<Person> People { get; set; }
-        public virtual ICollection<Visit> Visits { get; set; }
-        public virtual ICollection<PrescribedMed> PrescribedMeds { get; set; }
-        public virtual ICollection<Invoice> Invoices { get; set; }
-
-        public virtual ICollection<History> Histories { get; set; }
-        public virtual ICollection<Complaint> Complaints { get; set; }
-        public virtual ICollection<PhyicalExamination> PhyicalExaminations { get; set; }
-        public virtual ICollection<Generalities> Generalities { get; set; }
-
-
-
-    }
-    enum Genders { Male, Female, Transgender }
-    class Person
-    {
         public int PersonId { get; set; }
-        public int OPDRegId { get; set; } // FK
+
+        public string OPDRegistrationID { get; set; }
 
         public DateTime? DateofRecord { get; set; }
 
@@ -67,22 +46,34 @@ namespace CHClinic.Models.Data
         public string Occupation { get; set; }
         public string Religion { get; set; }
 
-        public virtual OPDReg OPDReg { get; set; }
+      //  [Timestamp]
+       // public Byte[] TimeStamp { get; set; }
+
+        public virtual ICollection<Visit> Visits { get; set; }
+        //  public virtual ICollection<PrescribedMed> PrescribedMeds { get; set; }
+        // public virtual ICollection<Invoice> Invoices { get; set; }
+
+        public virtual ICollection<History> Histories { get; set; }
+        public virtual ICollection<Complaint> Complaints { get; set; }
+        public virtual ICollection<PhyicalExamination> PhyicalExaminations { get; set; }
+        public virtual ICollection<Generalities> Generalities { get; set; }
+
+
     }
 
-    class State
+    public class State
     {
         public int StateId { get; set; }
         public string StateName { get; set; }
         public int CountryId { get; set; }
     }
-    class City
+    public class City
     {
         public int CityId { get; set; }
         public string CityName { get; set; }
         public int StateId { get; set; }
     }
-    class Country
+    public class Country
     {
         public int CountryId { get; set; }
         public string CountryName { get; set; }

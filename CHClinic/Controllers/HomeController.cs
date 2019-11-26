@@ -15,14 +15,14 @@ namespace CHClinic.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "CyberN Systems's Calcutta Homeo Clinic.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact Us.";
 
             return View();
         }

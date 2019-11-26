@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CHClinic.Models.Data
 {
-    class History
+    public class History
     {
         public int HistoryId { get; set; }
-        public int OPDRegId { get; set; }
+        public int PersonId { get; set; }
 
         public string Accomodation { get; set; }
         public string Addications { get; set; }
@@ -28,15 +28,15 @@ namespace CHClinic.Models.Data
         public string Sterlization { get; set; }
         public string Vaccine { get; set; }
 
-        public virtual OPDReg OPDReg { get; set; }
+        public virtual Person Person { get; set; }
     }
 
 
-    class Complaint
+    public class Complaint
     {
         public int ComplaintId { get; set; }
-        public int OPDRegId { get; set; }
-        
+        public int PersonId { get; set; }
+
         public string HistoryCompalin { get; set; }
         public string MatarnalSide { get; set; }
         public string OwnSide { get; set; }
@@ -44,14 +44,14 @@ namespace CHClinic.Models.Data
         public string PaternalSide { get; set; }
         public string PresentComplain { get; set; }
 
-        public virtual OPDReg OPDReg { get; set; }
+        public virtual Person Person { get; set; }
     }
 
-    class PhyicalExamination
+    public class PhyicalExamination
     {
         public int PhyicalExaminationId { get; set; }
-        public int OPDRegId { get; set; }
-        
+        public int PersonId { get; set; }
+
         public string Anemia { get; set; }
         public string Apperance { get; set; }
         public string BP { get; set; }
@@ -71,14 +71,14 @@ namespace CHClinic.Models.Data
         public string Respiration { get; set; }
         public string Temp { get; set; }
 
-        public virtual OPDReg OPDReg { get; set; }
+        public virtual Person Person { get; set; }
     }
 
-    class Generalities
+    public class Generalities
     {
         public int GeneralitiesId { get; set; }
-        public int OPDRegId { get; set; }
-        
+        public int PersonId { get; set; }
+
         public string Appatite { get; set; }
         public string Aversion { get; set; }
         public string Desire { get; set; }
@@ -98,6 +98,6 @@ namespace CHClinic.Models.Data
         public string Thirst { get; set; }
         public string Urine { get; set; }
 
-        public virtual OPDReg OPDReg { get; set; }
+        public virtual Person Person { get; set; }
     }
 }
