@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CHClinic.Models.Data.Complaint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.OPDRegistrationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HistoryCompalin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatarnalSide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnSide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PastComplian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaternalSide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PresentComplain)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.OPDRegistrationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HistoryCompalin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatarnalSide)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnSide)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PastComplian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaternalSide)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PresentComplain)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ComplaintId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ComplaintId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ComplaintId })
+        </td>
+    </tr>
+}
+
+</table>
