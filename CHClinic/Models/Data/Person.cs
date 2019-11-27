@@ -13,12 +13,13 @@ namespace CHClinic.Models.Data
         public Person()
         {
             Visits = new HashSet<Visit>();
+           
             //  PrescribedMeds = new HashSet<PrescribedMed>();
             // Invoices = new HashSet<Invoice>();
-            Histories = new HashSet<History>();
-            Complaints = new HashSet<Complaint>();
-            PhyicalExaminations = new HashSet<PhyicalExamination>();
-            Generalities = new HashSet<Generalities>();
+            // Histories = new HashSet<History>();
+            //Complaints = new HashSet<Complaint>();
+            //PhyicalExaminations = new HashSet<PhyicalExamination>();
+            //Generalities = new HashSet<Generalities>();
         }
 
         public int PersonId { get; set; }
@@ -46,17 +47,22 @@ namespace CHClinic.Models.Data
         public string Occupation { get; set; }
         public string Religion { get; set; }
 
-      //  [Timestamp]
-       // public Byte[] TimeStamp { get; set; }
+        public virtual History History { get; set; }
+        public virtual Complaint Complaint { get; set; }
+        public virtual PhyicalExamination Examination { get; set; }
+        public virtual Generalities Generalities { get; set; }
+
+        //  [Timestamp]
+        // public Byte[] TimeStamp { get; set; }
 
         public virtual ICollection<Visit> Visits { get; set; }
         //  public virtual ICollection<PrescribedMed> PrescribedMeds { get; set; }
         // public virtual ICollection<Invoice> Invoices { get; set; }
 
-        public virtual ICollection<History> Histories { get; set; }
-        public virtual ICollection<Complaint> Complaints { get; set; }
-        public virtual ICollection<PhyicalExamination> PhyicalExaminations { get; set; }
-        public virtual ICollection<Generalities> Generalities { get; set; }
+        //public virtual ICollection<History> Histories { get; set; }
+        //public virtual ICollection<Complaint> Complaints { get; set; }
+        //public virtual ICollection<PhyicalExamination> PhyicalExaminations { get; set; }
+        //public virtual ICollection<Generalities> Generalities { get; set; }
 
 
     }

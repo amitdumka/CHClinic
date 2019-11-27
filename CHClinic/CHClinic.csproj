@@ -135,7 +135,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,9 +144,7 @@
     <Compile Include="Models\Data\BloodGroup.cs" />
     <Compile Include="Models\Data\History.cs" />
     <Compile Include="Models\Data\Person.cs" />
-    <Compile Include="Models\Views\PeopleList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HistoriesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -186,19 +183,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\People\Create.cshtml" />
-    <Content Include="Views\People\Delete.cshtml" />
-    <Content Include="Views\People\Details.cshtml" />
-    <Content Include="Views\People\Edit.cshtml" />
-    <Content Include="Views\People\Index.cshtml" />
-    <Content Include="Views\Histories\Create.cshtml" />
-    <Content Include="Views\Histories\Delete.cshtml" />
-    <Content Include="Views\Histories\Details.cshtml" />
-    <Content Include="Views\Histories\Edit.cshtml" />
-    <Content Include="Views\Histories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

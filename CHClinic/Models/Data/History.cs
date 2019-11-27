@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CHClinic.Models.Data
 {
     public class History
     {
+        [ForeignKey("Person")]
         public int HistoryId { get; set; }
-        public int PersonId { get; set; }
-
+        //public int PersonId { get; set; }
         public string Accomodation { get; set; }
         public string Addications { get; set; }
         public string AnyMed { get; set; }
@@ -34,8 +35,9 @@ namespace CHClinic.Models.Data
 
     public class Complaint
     {
+        [ForeignKey("Person")]
         public int ComplaintId { get; set; }
-        public int PersonId { get; set; }
+        //public int PersonId { get; set; }
 
         public string HistoryCompalin { get; set; }
         public string MatarnalSide { get; set; }
@@ -49,8 +51,9 @@ namespace CHClinic.Models.Data
 
     public class PhyicalExamination
     {
+        [ForeignKey("Person")]
         public int PhyicalExaminationId { get; set; }
-        public int PersonId { get; set; }
+        //public int PersonId { get; set; }
 
         public string Anemia { get; set; }
         public string Apperance { get; set; }
@@ -76,8 +79,9 @@ namespace CHClinic.Models.Data
 
     public class Generalities
     {
+        [ForeignKey("Person")]
         public int GeneralitiesId { get; set; }
-        public int PersonId { get; set; }
+        //public int PersonId { get; set; }
 
         public string Appatite { get; set; }
         public string Aversion { get; set; }
