@@ -16,10 +16,44 @@ namespace CHClinic.Controllers
         private ClinicDBContext db = new ClinicDBContext();
 
         // GET: People
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var people = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
+        //    return View(people.ToList());
+        //}
+        public ActionResult Index(string opdRegistrationid, string searchString)
         {
-            var people = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
-            return View(people.ToList());
+            var peoples = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
+            var opdList = new List<string>();
+            var opdQry = from d in db.People
+                         orderby d.OPDRegistrationID
+                         select d.OPDRegistrationID;
+            opdList.AddRange(opdQry.Distinct());
+            ViewBag.opdRegistrationid = new SelectList(opdList);
+
+
+
+
+            if (!String.IsNullOrEmpty(searchString)|| !String.IsNullOrEmpty(opdRegistrationid)) 
+            {
+                var people = from p in db.People
+                             select p;
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    people = people.Where(s => s.MobileNo.Contains(searchString));
+                }
+                if (!string.IsNullOrEmpty(opdRegistrationid))
+                {
+                    people = people.Where(x => x.OPDRegistrationID == opdRegistrationid);
+                }
+
+
+                return View(people);
+            }
+            
+            return View(peoples.ToList());
+
         }
 
         // GET: People/Details/5
