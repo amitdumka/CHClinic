@@ -24,11 +24,21 @@ namespace CHClinic.Models
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<PhyicalExamination> PhyicalExaminations { get; set; }
         public DbSet<Generalities> Generalities { get; set; }
+       
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
+        
         public DbSet<AuthUser> AuthUsers { get; set; }
         public DbSet<AuthUserInfo> AuthUserInfos { get; set; }
+
+        //Version 2
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet <Income> Incomes { get; set; }
+        public DbSet<DueList> DueLists { get; set; }
+
 
     }
 }

@@ -11,7 +11,7 @@ using CHClinic.Models.Data;
 
 namespace CHClinic.Controllers
 {
-    public class PeopleController : Controller
+    public class GeneralPeopleController : Controller
     {
         private ClinicDBContext db = new ClinicDBContext();
 

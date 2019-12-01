@@ -11,112 +11,112 @@ using CHClinic.Models.Data;
 
 namespace CHClinic.Controllers
 {
-    public class ComplaintsController : Controller
+    public class StocksController : Controller
     {
         private ClinicDBContext db = new ClinicDBContext();
 
-        // GET: Complaints
+        // GET: Stocks
         public ActionResult Index()
         {
-            var complaints = db.Complaints.Include(c => c.Person);
-            return View(complaints.ToList());
+            var stocks = db.Stocks.Include(s => s.Medicine);
+            return View(stocks.ToList());
         }
 
-        // GET: Complaints/Details/5
+        // GET: Stocks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
+            Stock stock = db.Stocks.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(complaint);
+            return View(stock);
         }
 
-        // GET: Complaints/Create
+        // GET: Stocks/Create
         public ActionResult Create()
         {
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
+            ViewBag.MedicineId = new SelectList(db.Medicines, "MedicineId", "MedicineName");
             return View();
         }
 
-        // POST: Complaints/Create
+        // POST: Stocks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonId,HistoryCompalin,MatarnalSide,OwnSide,PastComplian,PaternalSide,PresentComplain")] Complaint complaint)
+        public ActionResult Create([Bind(Include = "StockId,MedicineId,Quantity,Unit,PurchasePrice")] Stock stock)
         {
             if (ModelState.IsValid)
             {
-                db.Complaints.Add(complaint);
+                db.Stocks.Add(stock);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
-            return View(complaint);
+            ViewBag.MedicineId = new SelectList(db.Medicines, "MedicineId", "MedicineName", stock.MedicineId);
+            return View(stock);
         }
 
-        // GET: Complaints/Edit/5
+        // GET: Stocks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
+            Stock stock = db.Stocks.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
-            return View(complaint);
+            ViewBag.MedicineId = new SelectList(db.Medicines, "MedicineId", "MedicineName", stock.MedicineId);
+            return View(stock);
         }
 
-        // POST: Complaints/Edit/5
+        // POST: Stocks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonId,HistoryCompalin,MatarnalSide,OwnSide,PastComplian,PaternalSide,PresentComplain")] Complaint complaint)
+        public ActionResult Edit([Bind(Include = "StockId,MedicineId,Quantity,Unit,PurchasePrice")] Stock stock)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(complaint).State = EntityState.Modified;
+                db.Entry(stock).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
-            return View(complaint);
+            ViewBag.MedicineId = new SelectList(db.Medicines, "MedicineId", "MedicineName", stock.MedicineId);
+            return View(stock);
         }
 
-        // GET: Complaints/Delete/5
+        // GET: Stocks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Complaint complaint = db.Complaints.Find(id);
-            if (complaint == null)
+            Stock stock = db.Stocks.Find(id);
+            if (stock == null)
             {
                 return HttpNotFound();
             }
-            return View(complaint);
+            return View(stock);
         }
 
-        // POST: Complaints/Delete/5
+        // POST: Stocks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Complaint complaint = db.Complaints.Find(id);
-            db.Complaints.Remove(complaint);
+            Stock stock = db.Stocks.Find(id);
+            db.Stocks.Remove(stock);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

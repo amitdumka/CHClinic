@@ -11,112 +11,107 @@ using CHClinic.Models.Data;
 
 namespace CHClinic.Controllers
 {
-    public class GeneralitiesController : Controller
+    public class ExpensesController : Controller
     {
         private ClinicDBContext db = new ClinicDBContext();
 
-        // GET: Generalities
+        // GET: Expenses
         public ActionResult Index()
         {
-            var generalities = db.Generalities.Include(g => g.Person);
-            return View(generalities.ToList());
+            return View(db.Expenses.ToList());
         }
 
-        // GET: Generalities/Details/5
+        // GET: Expenses/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Generalities generalities = db.Generalities.Find(id);
-            if (generalities == null)
+            Expense expense = db.Expenses.Find(id);
+            if (expense == null)
             {
                 return HttpNotFound();
             }
-            return View(generalities);
+            return View(expense);
         }
 
-        // GET: Generalities/Create
+        // GET: Expenses/Create
         public ActionResult Create()
         {
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
             return View();
         }
 
-        // POST: Generalities/Create
+        // POST: Expenses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GeneralitiesId,Appatite,Aversion,Desire,Discharge,Intolerance,Mensutral,Mental,Modalities,Periperation,Salavation,Sentation,Sleep,Stool,Taste,Tendencies,ThermalReaction,Thirst,Urine")] Generalities generalities)
+        public ActionResult Create([Bind(Include = "ExpenseId,Particulars,Date,Amount,PayMode,IsPaidMedicine,Remarks")] Expense expense)
         {
             if (ModelState.IsValid)
             {
-                db.Generalities.Add(generalities);
+                db.Expenses.Add(expense);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.PersonId);
-            return View(generalities);
+            return View(expense);
         }
 
-        // GET: Generalities/Edit/5
+        // GET: Expenses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Generalities generalities = db.Generalities.Find(id);
-            if (generalities == null)
+            Expense expense = db.Expenses.Find(id);
+            if (expense == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.PersonId);
-            return View(generalities);
+            return View(expense);
         }
 
-        // POST: Generalities/Edit/5
+        // POST: Expenses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GeneralitiesId,Appatite,Aversion,Desire,Discharge,Intolerance,Mensutral,Mental,Modalities,Periperation,Salavation,Sentation,Sleep,Stool,Taste,Tendencies,ThermalReaction,Thirst,Urine")] Generalities generalities)
+        public ActionResult Edit([Bind(Include = "ExpenseId,Particulars,Date,Amount,PayMode,IsPaidMedicine,Remarks")] Expense expense)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(generalities).State = EntityState.Modified;
+                db.Entry(expense).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.PersonId);
-            return View(generalities);
+            return View(expense);
         }
 
-        // GET: Generalities/Delete/5
+        // GET: Expenses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Generalities generalities = db.Generalities.Find(id);
-            if (generalities == null)
+            Expense expense = db.Expenses.Find(id);
+            if (expense == null)
             {
                 return HttpNotFound();
             }
-            return View(generalities);
+            return View(expense);
         }
 
-        // POST: Generalities/Delete/5
+        // POST: Expenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Generalities generalities = db.Generalities.Find(id);
-            db.Generalities.Remove(generalities);
+            Expense expense = db.Expenses.Find(id);
+            db.Expenses.Remove(expense);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

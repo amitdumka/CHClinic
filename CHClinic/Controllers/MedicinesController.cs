@@ -11,112 +11,107 @@ using CHClinic.Models.Data;
 
 namespace CHClinic.Controllers
 {
-    public class PhyicalExaminationsController : Controller
+    public class MedicinesController : Controller
     {
         private ClinicDBContext db = new ClinicDBContext();
 
-        // GET: PhyicalExaminations
+        // GET: Medicines
         public ActionResult Index()
         {
-            var phyicalExaminations = db.PhyicalExaminations.Include(p => p.Person);
-            return View(phyicalExaminations.ToList());
+            return View(db.Medicines.ToList());
         }
 
-        // GET: PhyicalExaminations/Details/5
+        // GET: Medicines/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhyicalExamination phyicalExamination = db.PhyicalExaminations.Find(id);
-            if (phyicalExamination == null)
+            Medicine medicine = db.Medicines.Find(id);
+            if (medicine == null)
             {
                 return HttpNotFound();
             }
-            return View(phyicalExamination);
+            return View(medicine);
         }
 
-        // GET: PhyicalExaminations/Create
+        // GET: Medicines/Create
         public ActionResult Create()
         {
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
             return View();
         }
 
-        // POST: PhyicalExaminations/Create
+        // POST: Medicines/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonId,Anemia,Apperance,BP,Built,Clubbing,Cynosis,Decubities,Facies,Jaundance,LymphNode,Neck,Nutri,Oedema,Pigmentation,Pluse,ReportDetails,Respiration,Temp")] PhyicalExamination phyicalExamination)
+        public ActionResult Create([Bind(Include = "MedicineId,MedicineName,Power,Description,CostPrice,SellingPrice")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {
-                db.PhyicalExaminations.Add(phyicalExamination);
+                db.Medicines.Add(medicine);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PersonId);
-            return View(phyicalExamination);
+            return View(medicine);
         }
 
-        // GET: PhyicalExaminations/Edit/5
+        // GET: Medicines/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhyicalExamination phyicalExamination = db.PhyicalExaminations.Find(id);
-            if (phyicalExamination == null)
+            Medicine medicine = db.Medicines.Find(id);
+            if (medicine == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PersonId);
-            return View(phyicalExamination);
+            return View(medicine);
         }
 
-        // POST: PhyicalExaminations/Edit/5
+        // POST: Medicines/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonId,Anemia,Apperance,BP,Built,Clubbing,Cynosis,Decubities,Facies,Jaundance,LymphNode,Neck,Nutri,Oedema,Pigmentation,Pluse,ReportDetails,Respiration,Temp")] PhyicalExamination phyicalExamination)
+        public ActionResult Edit([Bind(Include = "MedicineId,MedicineName,Power,Description,CostPrice,SellingPrice")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(phyicalExamination).State = EntityState.Modified;
+                db.Entry(medicine).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PersonId);
-            return View(phyicalExamination);
+            return View(medicine);
         }
 
-        // GET: PhyicalExaminations/Delete/5
+        // GET: Medicines/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PhyicalExamination phyicalExamination = db.PhyicalExaminations.Find(id);
-            if (phyicalExamination == null)
+            Medicine medicine = db.Medicines.Find(id);
+            if (medicine == null)
             {
                 return HttpNotFound();
             }
-            return View(phyicalExamination);
+            return View(medicine);
         }
 
-        // POST: PhyicalExaminations/Delete/5
+        // POST: Medicines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PhyicalExamination phyicalExamination = db.PhyicalExaminations.Find(id);
-            db.PhyicalExaminations.Remove(phyicalExamination);
+            Medicine medicine = db.Medicines.Find(id);
+            db.Medicines.Remove(medicine);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
