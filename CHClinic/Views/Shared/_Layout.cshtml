@@ -21,14 +21,18 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("People", "Index", "People")</li>
-                    <li>@Html.ActionLink("GeneralPeople", "Index", "GeneralPeople")</li>
-                    <li>@Html.ActionLink("FirstVisit", "Index", "FirstVisit")</li>
+                    <li>@Html.ActionLink("Case Take Up", "Index", "Person")</li>
+                    @*<li>@Html.ActionLink("GeneralPeople", "Index", "GeneralPeople")</li>*@
                     <li>@Html.ActionLink("Visit", "Index", "Visit")</li>
-                    <li>@Html.ActionLink("RegularVisit", "Index", "RegularVisit")</li>
-                    <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
-                    <li>@Html.ActionLink("Stocks", "Index", "Stocks")</li>
-                    <li>@Html.ActionLink("Expenses", "Index", "Expenses")</li>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Back Office</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
+                            <li>@Html.ActionLink("Stocks", "Index", "Stocks")</li>
+                            <li>@Html.ActionLink("Expenses", "Index", "Expenses")</li>
+                        </ul>
+
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

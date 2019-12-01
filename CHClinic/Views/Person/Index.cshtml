@@ -1,0 +1,534 @@
+﻿@model CHClinic.Models.Views.PatientListData
+
+@{
+    ViewBag.Title = "Patient Details";
+
+}
+
+<h2>Patient Case Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Index", "Person", FormMethod.Get))
+    {
+    <p>
+        Registration No: @Html.DropDownList("opdRegistrationid", "All")
+        Mobile No: @Html.TextBox("SearchString")
+        <input type="submit" value="Filter" />
+    </p>
+}
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.People.FirstOrDefault().OPDRegistrationID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.People.FirstOrDefault().FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.People.FirstOrDefault().MobileNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.People.FirstOrDefault().Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.People.FirstOrDefault().Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.People.FirstOrDefault().City)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.People)
+        {
+            string selectedRow = "";
+            if (item.PersonId == ViewBag.PersonId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow" valign="top">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.OPDRegistrationID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = item.PersonId }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PersonId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PersonId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PersonId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @if (ViewBag.PersonId > 0)
+    {
+
+        if (Model.Complaint != null)
+        {
+            <h3>Complaint of @Model.Complaint.Person.FullName</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint.HistoryCompalin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint.MatarnalSide)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint.OwnSide)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint.PaternalSide)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint.PastComplian)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Complaint.PresentComplain)
+                    </th>
+
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Complaints", new { id = Model.Complaint.Person.PersonId }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Complaints", new { id = Model.Complaint.Person.PersonId }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Complaint.HistoryCompalin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Complaint.MatarnalSide)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Complaint.OwnSide)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Complaint.PaternalSide)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Complaint.PastComplian)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Complaint.PresentComplain)
+                    </td>
+                </tr>
+
+
+            </table>
+        }
+        else
+        {
+            @Html.ActionLink("Create Complaint", "Create", "Complaints", new { id = ViewBag.PersonId }, null)
+            <br />
+        }
+
+        if (Model.History != null)
+        {
+            <h3>History of @Model.History.Person.FullName</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Accomodation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Addications)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.AnyMed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.BirthPlace)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.ChildAges)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Diet)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Habbit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Hobbies)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.MaritalStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Moutox)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.NoOfChild)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Obes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.RelationWithFamily)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.SexualHistory)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Sterlization)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.History.Vaccine)
+                    </th>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Histories", new { id = Model.History.Person.PersonId }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Histories", new { id = Model.History.Person.PersonId }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Accomodation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Addications)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.AnyMed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.BirthPlace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.ChildAges)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Diet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Habbit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Hobbies)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.MaritalStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Moutox)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.NoOfChild)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Obes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.RelationWithFamily)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.SexualHistory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Sterlization)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.History.Vaccine)
+                    </td>
+                </tr>
+
+
+            </table>
+        }
+        else
+        {
+            @Html.ActionLink("Create History", "Create", "Histories", new { id = ViewBag.PersonId }, null)
+            <br />
+        }
+
+
+        if (Model.Examination != null)
+        {
+            <h3>Physical Examination of @Model.Examination.Person.FullName</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Anemia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Apperance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.BP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Built)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Clubbing)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Cynosis)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Decubities)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Facies)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Jaundance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.LymphNode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Neck)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Nutri)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Oedema)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Pigmentation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Pluse)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.ReportDetails)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Respiration)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Examination.Temp)
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "PhyicalExaminations", new { id = Model.Examination.Person.PersonId }, null) |
+                        @Html.ActionLink("Delete", "Delete", "PhyicalExaminations", new { id = Model.Examination.Person.PersonId }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Anemia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Apperance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.BP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Built)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Clubbing)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Cynosis)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Decubities)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Facies)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Jaundance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.LymphNode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Neck)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Nutri)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Oedema)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Pigmentation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Pluse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.ReportDetails)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Respiration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Examination.Temp)
+                    </td>
+
+                </tr>
+
+
+            </table>
+        }
+        else
+        {
+            @Html.ActionLink("Create Examination", "Create", "PhyicalExaminations", new { id = ViewBag.PersonId }, null)
+            <br />
+        }
+
+        if (Model.Generalities != null)
+        {
+            <h3>Generalities of @Model.Generalities.Person.FullName</h3>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Appatite)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Aversion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Desire)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Discharge)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Intolerance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Mensutral)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Mental)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Modalities)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Periperation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Salavation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Sentation)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Sleep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Stool)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Taste)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Tendencies)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.ThermalReaction)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Thirst)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Generalities.Urine)
+                    </th>
+
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Generalities", new { id = Model.Generalities.Person.PersonId }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Generalities", new { id = Model.Generalities.Person.PersonId }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Appatite)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Aversion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Desire)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Discharge)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Intolerance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Mensutral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Mental)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Modalities)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Periperation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Salavation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Sentation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Sleep)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Stool)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Taste)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Tendencies)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.ThermalReaction)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Thirst)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Generalities.Urine)
+                    </td>
+                </tr>
+
+
+            </table>
+        }
+        else
+        {
+            @Html.ActionLink("Create Generalities", "Create", "Generalities", new { id = ViewBag.PersonId }, null)
+            <br />
+        }
+    }

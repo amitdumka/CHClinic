@@ -1,0 +1,129 @@
+﻿@model IEnumerable<CHClinic.Models.Data.History>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.OPDRegistrationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accomodation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Addications)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnyMed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChildAges)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habbit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hobbies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaritalStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Moutox)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfChild)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Obes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RelationWithFamily)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SexualHistory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sterlization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vaccine)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.OPDRegistrationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accomodation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Addications)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnyMed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthPlace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChildAges)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Habbit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hobbies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaritalStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Moutox)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfChild)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Obes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RelationWithFamily)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SexualHistory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sterlization)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vaccine)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PersonId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PersonId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonId })
+        </td>
+    </tr>
+}
+
+</table>

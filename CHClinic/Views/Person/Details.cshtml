@@ -10,38 +10,7 @@
     <h4>Person</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Complaint.HistoryCompalin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Complaint.HistoryCompalin)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Examination.Anemia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Examination.Anemia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Generalities.Appatite)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Generalities.Appatite)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.History.Accomodation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.History.Accomodation)
-        </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.OPDRegistrationID)
         </dt>
@@ -158,9 +127,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonId }) |
-    @Html.ActionLink("History", "Index", "Histories", new { id = Model.PersonId }, null)|
-    @Html.ActionLink("Complaints", "Index", "Complaints", new { id = Model.PersonId }, null)|
-    @Html.ActionLink("Generalities", "Index", "Generalities", new { id = Model.PersonId }, null)|
-    @Html.ActionLink("PhyicalExaminations", "Index", "PhyicalExaminations", new { id = Model.PersonId }, null)|
     @Html.ActionLink("Back to List", "Index")
 </p>

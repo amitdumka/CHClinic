@@ -9,7 +9,7 @@ namespace CHClinic.Models.Data
     public enum Genders { Male, Female, Transgender }
     public enum BloodGroups { Ap, Bp, Op, An, Bn, On, ABp, ABn }
     public enum Unit { Pcs, Lts, Ml, Gms, Pcks }
-    public enum PayMode { Cash, Card, BankTransfer, Cheque,DD}
+    public enum PayMode { Cash, Card, BankTransfer, Cheque, DD }
 
     public class Person
     {
@@ -39,11 +39,11 @@ namespace CHClinic.Models.Data
 
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
-        [Required (ErrorMessage ="City Name is required."), StringLength(50, ErrorMessage ="City Name cannot ne longer than 50 characters.")]
+        [Required(ErrorMessage = "City Name is required."), StringLength(50, ErrorMessage = "City Name cannot ne longer than 50 characters.")]
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        
+
         [Required(ErrorMessage = "MobileNo is required.")]
         [StringLength(14, MinimumLength = 10, ErrorMessage = "Mobile No cannot be longer than 14 and shorter than 10 characters.")]
         public string MobileNo { get; set; }
@@ -76,7 +76,7 @@ namespace CHClinic.Models.Data
     public class State
     {
         public int StateId { get; set; }
-        [Display(Name ="State")]
+        [Display(Name = "State")]
         [Required(ErrorMessage = "State Name is required."), StringLength(50, ErrorMessage = "State Name cannot ne longer than 50 characters.")]
         public string StateName { get; set; }
         public int CountryId { get; set; }
@@ -86,7 +86,7 @@ namespace CHClinic.Models.Data
     public class City
     {
         public int CityId { get; set; }
-        [Required(ErrorMessage = "City Name is required."), StringLength(50, ErrorMessage = "City Name cannot ne longer than 50 characters."), Display(Name ="City")]
+        [Required(ErrorMessage = "City Name is required."), StringLength(50, ErrorMessage = "City Name cannot ne longer than 50 characters."), Display(Name = "City")]
         public string CityName { get; set; }
         public int StateId { get; set; }
         public virtual State States { set; get; }
@@ -94,7 +94,7 @@ namespace CHClinic.Models.Data
     public class Country
     {
         public int CountryId { get; set; }
-        [Required(ErrorMessage = "Country Name is required."), StringLength(50, ErrorMessage = "Country Name cannot ne longer than 50 characters."), Display(Name ="Country")]
+        [Required(ErrorMessage = "Country Name is required."), StringLength(50, ErrorMessage = "Country Name cannot ne longer than 50 characters."), Display(Name = "Country")]
         public string CountryName { get; set; }
         public virtual ICollection<State> States { get; set; }
     }
@@ -110,8 +110,6 @@ namespace CHClinic.Models.Data
         [Key]
         [ForeignKey("Person")]
         public int PersonId { get; set; }
-        //public int HistoryId { get; set; }
-
         public string Accomodation { get; set; }
         public string Addications { get; set; }
         public string AnyMed { get; set; }
@@ -133,13 +131,10 @@ namespace CHClinic.Models.Data
     }
     public class Complaint
     {
-
         [Key]
         [ForeignKey("Person")]
         public int PersonId { get; set; }
-
-        //public int ComplaintId { get; set; }
-
+        //TODO: Spell Check
         [Display(Name = "History Compalin")]
         public string HistoryCompalin { get; set; }
         [Display(Name = "Matarnal Side")]
@@ -160,10 +155,6 @@ namespace CHClinic.Models.Data
         [Key]
         [ForeignKey("Person")]
         public int PersonId { get; set; }
-
-        //public int PhyicalExaminationId { get; set; }
-
-
         public string Anemia { get; set; }
         public string Apperance { get; set; }
 
@@ -194,8 +185,6 @@ namespace CHClinic.Models.Data
         [Key]
         [ForeignKey("Person")]
         public int PersonId { get; set; }
-        //public int GeneralitiesId { get; set; }
-        //public int PersonId { get; set; }
 
         public string Appatite { get; set; }
         public string Aversion { get; set; }
@@ -280,7 +269,9 @@ namespace CHClinic.Models.Data
         [Display(Name = "Drops/Goli")]
         public string Quantity { get; set; }
 
-        public float Cost { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Cost { get; set; }
         public string Remarks { get; set; }
 
         public virtual Person Person { get; set; }
@@ -292,15 +283,25 @@ namespace CHClinic.Models.Data
         public int VisitId { get; set; } //FK
 
         [Display(Name = "Visit Charge")]
-        public float VisitCharge { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal VisitCharge { get; set; }
         [Display(Name = "Medicene Charge")]
-        public float MedCharge { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal MedCharge { get; set; }
         [Display(Name = "Other Charges")]
-        public float OtherCharges { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal OtherCharges { get; set; }
         [Display(Name = "Paid Amount")]
-        public float Paid { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Paid { get; set; }
         [Display(Name = "UnPaid Amount")]
-        public float Dues { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Dues { get; set; }
         public string Remarks { get; set; }
 
         public virtual Person Person { get; set; }
@@ -311,8 +312,12 @@ namespace CHClinic.Models.Data
     {
         public int DueListId { get; set; }
         public int VisitId { get; set; }
-        public float Amount { get; set; }
-        public float ClearedAmount { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal ClearedAmount { get; set; }
         public bool IsCleared { get; set; }
         public virtual Visit Visit { get; set; }
     }
@@ -320,27 +325,31 @@ namespace CHClinic.Models.Data
     {
         public int IncomeId { get; set; }
         public DateTime? Date { get; set; }
-        public float Amount { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Amount { get; set; }
 
     }
     public class Expense
     {
         public int ExpenseId { get; set; }
-        
-        [Display (Name ="Expense Details"), Required(ErrorMessage = "Expense Details is required.")]
+
+        [Display(Name = "Expense Details"), Required(ErrorMessage = "Expense Details is required.")]
         public string Particulars { get; set; }
-        
+
         [Required, DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Date { get; set; }
-        
+
         [Required]
-        public float Amount { get; set; }
-        
-        [Display (Name ="Payment Mode")]
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Payment Mode")]
         public PayMode PayMode { get; set; }
-        
-        [Display(Name="Is Medicine")]
+
+        [Display(Name = "Is Medicine")]
         public bool IsPaidMedicine { get; set; }
         public string Remarks { get; set; }
 
@@ -350,7 +359,9 @@ namespace CHClinic.Models.Data
         public int ProfitLossId { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
-        public float Amount { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal Amount { get; set; }
         public int IsLoss { get; set; }
 
     }
@@ -366,14 +377,18 @@ namespace CHClinic.Models.Data
         public string Description { get; set; }
 
         [Display(Name = "Cost Price")]
-        public float CostPrice { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal CostPrice { get; set; }
         [Display(Name = "Selling Price")]
-        public float SellingPrice { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal SellingPrice { get; set; }
         public virtual ICollection<Medicine> Medicines { get; set; }
 
         public Medicine()
         {
-           this.Medicines = new HashSet<Medicine>();
+            this.Medicines = new HashSet<Medicine>();
         }
     }
     public class Stock
@@ -385,7 +400,9 @@ namespace CHClinic.Models.Data
         [Required]
         public Unit Unit { get; set; }
         [Required]
-        public float PurchasePrice { get; set; }
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal PurchasePrice { get; set; }
         public virtual Medicine Medicine { get; set; }
     }
 

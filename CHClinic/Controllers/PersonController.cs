@@ -8,22 +8,19 @@ using System.Web;
 using System.Web.Mvc;
 using CHClinic.Models;
 using CHClinic.Models.Data;
+using CHClinic.Models.Views;
 
 namespace CHClinic.Controllers
 {
-    public class GeneralPeopleController : Controller
+    public class PersonController : Controller
     {
         private ClinicDBContext db = new ClinicDBContext();
 
-        // GET: People
-        //public ActionResult Index()
-        //{
-        //    var people = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
-        //    return View(people.ToList());
-        //}
-        public ActionResult Index(string opdRegistrationid, string searchString)
+        // GET: Person
+        public ActionResult Index(int? id, string opdRegistrationid, string searchString)
         {
-            var peoples = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
+            //var people = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
+            //return View(people.ToList());
             var opdList = new List<string>();
             var opdQry = from d in db.People
                          orderby d.OPDRegistrationID
@@ -31,32 +28,52 @@ namespace CHClinic.Controllers
             opdList.AddRange(opdQry.Distinct());
             ViewBag.opdRegistrationid = new SelectList(opdList);
 
+            var viewModel = new PatientListData();
+            viewModel.People = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                .OrderBy(p => p.LastName);
 
-
-
-            if (!String.IsNullOrEmpty(searchString)|| !String.IsNullOrEmpty(opdRegistrationid)) 
+            if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {
-                var people = from p in db.People
+                var people = from p in db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                .OrderBy(p => p.LastName)
                              select p;
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    people = people.Where(s => s.MobileNo.Contains(searchString));
+                    viewModel.People = people.Where(s => s.MobileNo.Contains(searchString));
                 }
                 if (!string.IsNullOrEmpty(opdRegistrationid))
                 {
-                    people = people.Where(x => x.OPDRegistrationID == opdRegistrationid);
+                    viewModel.People = people.Where(x => x.OPDRegistrationID == opdRegistrationid);
                 }
 
 
-                return View(people);
+                return View(viewModel);
             }
-            
-            return View(peoples.ToList());
 
+            if (id != null)
+            {
+                ViewBag.PersonId = id.Value;
+                viewModel.History = viewModel.People.Where(
+                    i => i.PersonId == id.Value).Single().History;
+                viewModel.Complaint = viewModel.People.Where(
+                    i => i.PersonId == id.Value).Single().Complaint;
+                viewModel.Examination = viewModel.People.Where(
+                                    i => i.PersonId == id.Value).Single().Examination;
+                viewModel.Generalities = viewModel.People.Where(
+                                    i => i.PersonId == id.Value).Single().Generalities;
+
+            }
+            else
+            {
+                ViewBag.PersonId = -999;
+            }
+
+
+            return View(viewModel);
         }
 
-        // GET: People/Details/5
+        // GET: Person/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -71,7 +88,7 @@ namespace CHClinic.Controllers
             return View(person);
         }
 
-        // GET: People/Create
+        // GET: Person/Create
         public ActionResult Create()
         {
             ViewBag.PersonId = new SelectList(db.Complaints, "PersonId", "HistoryCompalin");
@@ -81,7 +98,7 @@ namespace CHClinic.Controllers
             return View();
         }
 
-        // POST: People/Create
+        // POST: Person/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -102,7 +119,7 @@ namespace CHClinic.Controllers
             return View(person);
         }
 
-        // GET: People/Edit/5
+        // GET: Person/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,14 +131,14 @@ namespace CHClinic.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonId = new SelectList(db.Complaints, "ComplaintId", "HistoryCompalin", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PhyicalExaminationId", "Anemia", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.Generalities, "GeneralitiesId", "Appatite", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.Histories, "HistoryId", "Accomodation", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Complaints, "PersonId", "HistoryCompalin", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PersonId", "Anemia", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Generalities, "PersonId", "Appatite", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Histories, "PersonId", "Accomodation", person.PersonId);
             return View(person);
         }
 
-        // POST: People/Edit/5
+        // POST: Person/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -134,14 +151,14 @@ namespace CHClinic.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PersonId = new SelectList(db.Complaints, "ComplaintId", "HistoryCompalin", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PhyicalExaminationId", "Anemia", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.Generalities, "GeneralitiesId", "Appatite", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.Histories, "HistoryId", "Accomodation", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Complaints, "PersonId", "HistoryCompalin", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PersonId", "Anemia", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Generalities, "PersonId", "Appatite", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Histories, "PersonId", "Accomodation", person.PersonId);
             return View(person);
         }
 
-        // GET: People/Delete/5
+        // GET: Person/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -156,7 +173,7 @@ namespace CHClinic.Controllers
             return View(person);
         }
 
-        // POST: People/Delete/5
+        // POST: Person/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

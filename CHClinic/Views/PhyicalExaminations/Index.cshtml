@@ -1,0 +1,141 @@
+﻿@model IEnumerable<CHClinic.Models.Data.PhyicalExamination>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Person.OPDRegistrationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anemia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apperance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Built)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clubbing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cynosis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Decubities)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Facies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jaundance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LymphNode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Neck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nutri)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Oedema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pigmentation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pluse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReportDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Respiration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temp)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Person.OPDRegistrationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anemia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apperance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Built)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clubbing)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cynosis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Decubities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Facies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jaundance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LymphNode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Neck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nutri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Oedema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pigmentation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pluse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Respiration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temp)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PersonId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PersonId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonId })
+        </td>
+    </tr>
+}
+
+</table>
