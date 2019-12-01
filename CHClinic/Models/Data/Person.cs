@@ -135,8 +135,8 @@ namespace CHClinic.Models.Data
         [ForeignKey("Person")]
         public int PersonId { get; set; }
         //TODO: Spell Check
-        [Display(Name = "History Compalin")]
-        public string HistoryCompalin { get; set; }
+        [Display(Name = "History Complain")]
+        public string HistoryComplaint { get; set; }
         [Display(Name = "Matarnal Side")]
         public string MatarnalSide { get; set; }
         [Display(Name = "Own Side")]
