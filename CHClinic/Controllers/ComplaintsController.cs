@@ -40,7 +40,7 @@ namespace CHClinic.Controllers
         // GET: Complaints/Create
         public ActionResult Create()
         {
-            ViewBag.ComplaintId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ComplaintId,HistoryCompalin,MatarnalSide,OwnSide,PastComplian,PaternalSide,PresentComplain")] Complaint complaint)
+        public ActionResult Create([Bind(Include = "PersonId,HistoryCompalin,MatarnalSide,OwnSide,PastComplian,PaternalSide,PresentComplain")] Complaint complaint)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace CHClinic.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ComplaintId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.ComplaintId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
             return View(complaint);
         }
 
@@ -74,7 +74,7 @@ namespace CHClinic.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ComplaintId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.ComplaintId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
             return View(complaint);
         }
 
@@ -83,7 +83,7 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ComplaintId,HistoryCompalin,MatarnalSide,OwnSide,PastComplian,PaternalSide,PresentComplain")] Complaint complaint)
+        public ActionResult Edit([Bind(Include = "PersonId,HistoryCompalin,MatarnalSide,OwnSide,PastComplian,PaternalSide,PresentComplain")] Complaint complaint)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace CHClinic.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ComplaintId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.ComplaintId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
             return View(complaint);
         }
 

@@ -40,7 +40,7 @@ namespace CHClinic.Controllers
         // GET: PhyicalExaminations/Create
         public ActionResult Create()
         {
-            ViewBag.PhyicalExaminationId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PhyicalExaminationId,Anemia,Apperance,BP,Built,Clubbing,Cynosis,Decubities,Facies,Jaundance,LymphNode,Neck,Nutri,Oedema,Pigmentation,Pluse,ReportDetails,Respiration,Temp")] PhyicalExamination phyicalExamination)
+        public ActionResult Create([Bind(Include = "PersonId,Anemia,Apperance,BP,Built,Clubbing,Cynosis,Decubities,Facies,Jaundance,LymphNode,Neck,Nutri,Oedema,Pigmentation,Pluse,ReportDetails,Respiration,Temp")] PhyicalExamination phyicalExamination)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace CHClinic.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PhyicalExaminationId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PhyicalExaminationId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PersonId);
             return View(phyicalExamination);
         }
 
@@ -74,7 +74,7 @@ namespace CHClinic.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PhyicalExaminationId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PhyicalExaminationId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PersonId);
             return View(phyicalExamination);
         }
 
@@ -83,7 +83,7 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PhyicalExaminationId,Anemia,Apperance,BP,Built,Clubbing,Cynosis,Decubities,Facies,Jaundance,LymphNode,Neck,Nutri,Oedema,Pigmentation,Pluse,ReportDetails,Respiration,Temp")] PhyicalExamination phyicalExamination)
+        public ActionResult Edit([Bind(Include = "PersonId,Anemia,Apperance,BP,Built,Clubbing,Cynosis,Decubities,Facies,Jaundance,LymphNode,Neck,Nutri,Oedema,Pigmentation,Pluse,ReportDetails,Respiration,Temp")] PhyicalExamination phyicalExamination)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace CHClinic.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PhyicalExaminationId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PhyicalExaminationId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", phyicalExamination.PersonId);
             return View(phyicalExamination);
         }
 

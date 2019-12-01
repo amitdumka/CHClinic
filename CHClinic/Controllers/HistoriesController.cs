@@ -48,7 +48,7 @@ namespace CHClinic.Controllers
         public ActionResult Create(int? id)
         {
             
-            ViewBag.HistoryId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
               //TODO: Fix PersonID so no error chance                     
             if (id != null)
             {
@@ -65,7 +65,7 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HistoryId,Accomodation,Addications,AnyMed,BirthPlace,ChildAges,Diet,Habbit,Hobbies,MaritalStatus,Moutox,NoOfChild,Obes,RelationWithFamily,SexualHistory,Sterlization,Vaccine")] History history)
+        public ActionResult Create([Bind(Include = "PersonId,Accomodation,Addications,AnyMed,BirthPlace,ChildAges,Diet,Habbit,Hobbies,MaritalStatus,Moutox,NoOfChild,Obes,RelationWithFamily,SexualHistory,Sterlization,Vaccine")] History history)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace CHClinic.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.HistoryId = new SelectList(db.People, "PersonId", "OPDRegistrationID", history.HistoryId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", history.PersonId);
             return View(history);
         }
 
@@ -90,7 +90,7 @@ namespace CHClinic.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HistoryId = new SelectList(db.People, "PersonId", "OPDRegistrationID", history.HistoryId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", history.PersonId);
             return View(history);
         }
 
@@ -99,7 +99,7 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HistoryId,Accomodation,Addications,AnyMed,BirthPlace,ChildAges,Diet,Habbit,Hobbies,MaritalStatus,Moutox,NoOfChild,Obes,RelationWithFamily,SexualHistory,Sterlization,Vaccine")] History history)
+        public ActionResult Edit([Bind(Include = "PersonId,Accomodation,Addications,AnyMed,BirthPlace,ChildAges,Diet,Habbit,Hobbies,MaritalStatus,Moutox,NoOfChild,Obes,RelationWithFamily,SexualHistory,Sterlization,Vaccine")] History history)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace CHClinic.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.HistoryId = new SelectList(db.People, "PersonId", "OPDRegistrationID", history.HistoryId);
+            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", history.PersonId);
             return View(history);
         }
 

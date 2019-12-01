@@ -96,9 +96,11 @@ namespace CHClinic.Models.Data
     }
     public class History
     {
+        [Key]
         [ForeignKey("Person")]
-        public int HistoryId { get; set; }
-        //public int PersonId { get; set; }
+        public int PersonId { get; set; }
+        //public int HistoryId { get; set; }
+
         public string Accomodation { get; set; }
         public string Addications { get; set; }
         public string AnyMed { get; set; }
@@ -122,8 +124,11 @@ namespace CHClinic.Models.Data
 
     public class Complaint
     {
+        
+        [Key]
         [ForeignKey("Person")]
-        public int ComplaintId { get; set; }
+        public int PersonId { get; set; }
+        //public int ComplaintId { get; set; }
         //public int PersonId { get; set; }
 
         public string HistoryCompalin { get; set; }
@@ -138,8 +143,10 @@ namespace CHClinic.Models.Data
 
     public class PhyicalExamination
     {
+        [Key]
         [ForeignKey("Person")]
-        public int PhyicalExaminationId { get; set; }
+        public int PersonId { get; set; }
+        //public int PhyicalExaminationId { get; set; }
         //public int PersonId { get; set; }
 
         public string Anemia { get; set; }
@@ -166,8 +173,10 @@ namespace CHClinic.Models.Data
 
     public class Generalities
     {
+        [Key]
         [ForeignKey("Person")]
-        public int GeneralitiesId { get; set; }
+        public int PersonId { get; set; }
+        //public int GeneralitiesId { get; set; }
         //public int PersonId { get; set; }
 
         public string Appatite { get; set; }

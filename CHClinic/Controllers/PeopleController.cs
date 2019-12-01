@@ -74,10 +74,10 @@ namespace CHClinic.Controllers
         // GET: People/Create
         public ActionResult Create()
         {
-            ViewBag.PersonId = new SelectList(db.Complaints, "ComplaintId", "HistoryCompalin");
-            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PhyicalExaminationId", "Anemia");
-            ViewBag.PersonId = new SelectList(db.Generalities, "GeneralitiesId", "Appatite");
-            ViewBag.PersonId = new SelectList(db.Histories, "HistoryId", "Accomodation");
+            ViewBag.PersonId = new SelectList(db.Complaints, "PersonId", "HistoryCompalin");
+            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PersonId", "Anemia");
+            ViewBag.PersonId = new SelectList(db.Generalities, "PersonId", "Appatite");
+            ViewBag.PersonId = new SelectList(db.Histories, "PersonId", "Accomodation");
             return View();
         }
 
@@ -95,10 +95,10 @@ namespace CHClinic.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PersonId = new SelectList(db.Complaints, "ComplaintId", "HistoryCompalin", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PhyicalExaminationId", "Anemia", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.Generalities, "GeneralitiesId", "Appatite", person.PersonId);
-            ViewBag.PersonId = new SelectList(db.Histories, "HistoryId", "Accomodation", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Complaints, "PersonId", "HistoryCompalin", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.PhyicalExaminations, "PersonId", "Anemia", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Generalities, "PersonId", "Appatite", person.PersonId);
+            ViewBag.PersonId = new SelectList(db.Histories, "PersonId", "Accomodation", person.PersonId);
             return View(person);
         }
 

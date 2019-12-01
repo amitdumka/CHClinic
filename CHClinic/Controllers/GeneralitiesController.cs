@@ -58,7 +58,7 @@ namespace CHClinic.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.GeneralitiesId);
+            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.PersonId);
             return View(generalities);
         }
 
@@ -74,7 +74,7 @@ namespace CHClinic.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.GeneralitiesId);
+            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.PersonId);
             return View(generalities);
         }
 
@@ -91,7 +91,7 @@ namespace CHClinic.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.GeneralitiesId);
+            ViewBag.GeneralitiesId = new SelectList(db.People, "PersonId", "OPDRegistrationID", generalities.PersonId);
             return View(generalities);
         }
 
