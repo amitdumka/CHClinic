@@ -1,0 +1,185 @@
+﻿@model CHClinic.Models.Views.VisitListData
+
+
+@{
+    ViewBag.Title = "Visit Record";
+}
+
+<h2>Patient Visit Record</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Person.OPDRegistrationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Person.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().VisitDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Problems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Revisit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().NextVisit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Billable)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Visits)
+    {
+        string selectedRow = "";
+        if (item.VisitId == ViewBag.VisitId)
+        {
+            selectedRow = "success";
+        }
+        <tr class="@selectedRow" valign="top">
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.OPDRegistrationID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Problems)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Revisit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextVisit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Billable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitBillable)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.VisitId }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.VisitId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.VisitId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.VisitId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@if (Model.Meds != null)
+{
+    <h3>Prescribed Med for Selected Person</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Power</th>
+            <th>No of Times</th>
+            <th>Quantity</th>
+            <th>Remarks</th>
+        </tr>
+
+        @foreach (var item in Model.Meds)
+        {
+            string selectedRow = "";
+            if (item.VisitId == ViewBag.VisitId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = item.VisitId })
+                </td>
+                <td>
+                    @item.MedicineName
+                </td>
+                <td>
+                    @item.Power
+                </td>
+                <td>
+                    @item.NoOfTime
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @item.Remarks
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    @Html.ActionLink("Add Med", "Create", "PrescribedMeds", new { id = ViewBag.VisitId }, null)
+    <br />
+}
+
+@if (Model.Invoices != null)
+{
+    <h3>Invoice for Selected Person</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Medical Charges</th>
+            <th>Visit Charges</th>
+            <th>Other Charges</th>
+            <th>Paid</th>
+            <th>Dues</th>
+            <th>Remarks</th>
+        </tr>
+
+        @foreach (var item in Model.Invoices)
+        {
+            string selectedRow = "";
+            if (item.VisitId == ViewBag.VisitId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { id = item.VisitId })
+                </td>
+                <td>
+                    @item.MedCharge
+                </td>
+                <td>
+                    @item.VisitCharge
+                </td>
+                <td>
+                    @item.OtherCharges
+                </td>
+                <td>
+                    @item.Paid
+                </td>
+                <td>
+                    @item.Dues
+                </td>
+                <td>
+                    @item.Remarks
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    @Html.ActionLink("Create Invoice", "Create", "Invoices", new { id = ViewBag.VisitId }, null)
+    <br />
+}

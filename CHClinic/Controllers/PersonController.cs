@@ -19,8 +19,6 @@ namespace CHClinic.Controllers
         // GET: Person
         public ActionResult Index(int? id, string opdRegistrationid, string searchString)
         {
-            //var people = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History);
-            //return View(people.ToList());
             var opdList = new List<string>();
             var opdQry = from d in db.People
                          orderby d.OPDRegistrationID
@@ -56,12 +54,16 @@ namespace CHClinic.Controllers
                 ViewBag.PersonId = id.Value;
                 viewModel.History = viewModel.People.Where(
                     i => i.PersonId == id.Value).Single().History;
+
                 viewModel.Complaint = viewModel.People.Where(
                     i => i.PersonId == id.Value).Single().Complaint;
+
                 viewModel.Examination = viewModel.People.Where(
                                     i => i.PersonId == id.Value).Single().Examination;
+
                 viewModel.Generalities = viewModel.People.Where(
                                     i => i.PersonId == id.Value).Single().Generalities;
+
 
             }
             else

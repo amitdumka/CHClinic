@@ -145,7 +145,9 @@
     <Compile Include="Controllers\MedicinesController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\PhyicalExaminationsController.cs" />
+    <Compile Include="Controllers\PrescribedMedsController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
+    <Compile Include="Controllers\VisitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -166,8 +168,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Res\HelpFulInfo.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\CHClinic - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -235,6 +239,18 @@
     <Content Include="Views\Generalities\Details.cshtml" />
     <Content Include="Views\Generalities\Edit.cshtml" />
     <Content Include="Views\Generalities\Index.cshtml" />
+    <Content Include="Views\Visit\Create.cshtml" />
+    <Content Include="Views\Visit\Delete.cshtml" />
+    <Content Include="Views\Visit\Details.cshtml" />
+    <Content Include="Views\Visit\Edit.cshtml" />
+    <Content Include="Views\Visit\Index.cshtml" />
+    <Content Include="Views\Visit\CreateMeds.cshtml" />
+    <Content Include="Views\PrescribedMeds\Create.cshtml" />
+    <Content Include="Views\PrescribedMeds\Delete.cshtml" />
+    <Content Include="Views\PrescribedMeds\Details.cshtml" />
+    <Content Include="Views\PrescribedMeds\Edit.cshtml" />
+    <Content Include="Views\PrescribedMeds\Index.cshtml" />
+    <Content Include="Views\PrescribedMeds\BulkSave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

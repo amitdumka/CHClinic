@@ -217,6 +217,7 @@ namespace CHClinic.Models.Data
         }
 
         public int VisitId { get; set; } //PK
+        [Required]
         public int PersonId { get; set; } //FK
 
         [DataType(DataType.Date)]
@@ -224,25 +225,26 @@ namespace CHClinic.Models.Data
         [Display(Name = "Visit Date")]
         public DateTime? VisitDate { get; set; }
 
-        [Display(Name = "Visit No")]
-        public int VisitNo { get; set; }
+        //[Display(Name = "Visit No")]
+        //public int VisitNo { get; set; }
+
+        [Display(Name = "Complains")]
+        public string Problems { get; set; }
 
         [Display(Name = "Is Revisit")]
-        public int Revisit { get; set; }
+        public bool Revisit { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Next Visit Date")]
         public DateTime? NextVisit { get; set; }
 
-        [Display(Name = "Complains")]
-        public string Problems { get; set; }
-
+        
         [Display(Name = "Is Billable")]
-        public int Billable { get; set; }
+        public bool Billable { get; set; }
 
         [Display(Name = "Is Visit Billable")]
-        public int VisitBillable { get; set; }
+        public bool VisitBillable { get; set; }
 
         public virtual Person Person { get; set; }
 
@@ -254,7 +256,7 @@ namespace CHClinic.Models.Data
     public class PrescribedMed
     {
         public int PrescribedMedId { get; set; } //PK
-        public int VisitID { get; set; } //FK
+        public int VisitId { get; set; } //FK
 
         [Required]
         [Display(Name = "Medicine Name")]
@@ -273,8 +275,7 @@ namespace CHClinic.Models.Data
         [Column(TypeName = "money")]
         public decimal Cost { get; set; }
         public string Remarks { get; set; }
-
-        public virtual Person Person { get; set; }
+              
         public virtual Visit Visit { get; set; }
     }
     public class Invoice
@@ -286,25 +287,28 @@ namespace CHClinic.Models.Data
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal VisitCharge { get; set; }
+
         [Display(Name = "Medicene Charge")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal MedCharge { get; set; }
+        
         [Display(Name = "Other Charges")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal OtherCharges { get; set; }
+        
         [Display(Name = "Paid Amount")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Paid { get; set; }
+        
         [Display(Name = "UnPaid Amount")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Dues { get; set; }
         public string Remarks { get; set; }
-
-        public virtual Person Person { get; set; }
+                
         public virtual Visit Visit { get; set; }
 
     }
@@ -312,9 +316,11 @@ namespace CHClinic.Models.Data
     {
         public int DueListId { get; set; }
         public int VisitId { get; set; }
+       
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
+        
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal ClearedAmount { get; set; }

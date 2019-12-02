@@ -10,7 +10,7 @@ namespace CHClinic.Models
 {
     public class ClinicDBContext : DbContext
     {
-        public ClinicDBContext() : base("CHClinicDatabase")
+        public ClinicDBContext() : base("name=MyDB")
         {
 
         }
