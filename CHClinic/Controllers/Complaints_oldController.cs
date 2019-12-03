@@ -11,10 +11,10 @@ using CHClinic.Models.Data;
 
 namespace CHClinic.Controllers
 {
-    public class ComplaintsController : Controller
+    public class Complaints_oldController : Controller
     {
         private ClinicDBContext db = new ClinicDBContext();
-
+        
         // GET: Complaints
         public ActionResult Index()
         {
@@ -42,15 +42,12 @@ namespace CHClinic.Controllers
         {
             if (id != null)
             {
-                ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", id);
+                ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID",id);
             }
             else
-                ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
+                 ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
             ViewBag.returnUrl = Request.UrlReferrer;
             return View();
-            //Old 
-            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
-            //return View();
         }
 
         // POST: Complaints/Create
@@ -58,14 +55,13 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonId,HistoryComplain,MatarnalSide,OwnSide,PaternalSide,PastComplian,PresentComplain")] Complaint complaint, string returnUrl)
+        public ActionResult Create([Bind(Include = "PersonId,HistoryCompalin,MatarnalSide,OwnSide,PaternalSide,PastComplian,PresentComplain")] Complaint complaint, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 db.Complaints.Add(complaint);
                 db.SaveChanges();
                 return Redirect(returnUrl);
-                //return RedirectToAction("Index");
             }
 
             ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
@@ -88,18 +84,6 @@ namespace CHClinic.Controllers
 
             ViewBag.returnUrl = Request.UrlReferrer;
             return View(complaint);
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Complaint complaint = db.Complaints.Find(id);
-            //if (complaint == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
-            //return View(complaint);
         }
 
         // POST: Complaints/Edit/5
@@ -107,15 +91,15 @@ namespace CHClinic.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonId,HistoryComplain,MatarnalSide,OwnSide,PaternalSide,PastComplian,PresentComplain")] Complaint complaint, string returnUrl)
+        public ActionResult Edit([Bind(Include = "PersonId,HistoryCompalin,MatarnalSide,OwnSide,PaternalSide,PastComplian,PresentComplain")] Complaint complaint, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(complaint).State = EntityState.Modified;
                 db.SaveChanges();
                 return Redirect(returnUrl);
-               // return RedirectToAction("Index");
 
+                // return RedirectToAction(returnUrl);
             }
             ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", complaint.PersonId);
             return View(complaint);
@@ -133,6 +117,7 @@ namespace CHClinic.Controllers
             {
                 return HttpNotFound();
             }
+            
             ViewBag.returnUrl = Request.UrlReferrer;
             return View(complaint);
         }
@@ -145,6 +130,7 @@ namespace CHClinic.Controllers
             Complaint complaint = db.Complaints.Find(id);
             db.Complaints.Remove(complaint);
             db.SaveChanges();
+
             return Redirect(returnUrl);
             //return RedirectToAction("Index");
         }

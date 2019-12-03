@@ -57,9 +57,11 @@ namespace CHClinic.Models.Data
         public virtual Generalities Generalities { get; set; }
 
         public virtual ICollection<Visit> Visits { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
         public Person()
         {
             Visits = new HashSet<Visit>();
+            Appointments = new HashSet<Appointment>();
         }
 
 
@@ -134,9 +136,9 @@ namespace CHClinic.Models.Data
         [Key]
         [ForeignKey("Person")]
         public int PersonId { get; set; }
-        //TODO: Spell Check
+       
         [Display(Name = "History Complain")]
-        public string HistoryComplaint { get; set; }
+        public string HistoryComplain { get; set; }
         [Display(Name = "Matarnal Side")]
         public string MatarnalSide { get; set; }
         [Display(Name = "Own Side")]
@@ -245,6 +247,11 @@ namespace CHClinic.Models.Data
 
         [Display(Name = "Is Visit Billable")]
         public bool VisitBillable { get; set; }
+
+        [Display(Name = "Visit Charge")]
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal VisitCharge { get; set; }
 
         public virtual Person Person { get; set; }
 
@@ -412,5 +419,12 @@ namespace CHClinic.Models.Data
         public virtual Medicine Medicine { get; set; }
     }
 
-
+    public class Appointment
+    {
+        public int AppointmentId { get; set; }
+        public int PersonId { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime? VisitDate { get; set; }
+        public virtual Person Person { get; set; }
+    }
 }

@@ -38,6 +38,7 @@ namespace CHClinic.Models
         public DbSet<Expense> Expenses { get; set; }
         public DbSet <Income> Incomes { get; set; }
         public DbSet<DueList> DueLists { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
 
     }

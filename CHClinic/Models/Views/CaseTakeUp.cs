@@ -1,6 +1,8 @@
 ﻿using CHClinic.Models.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,6 +15,16 @@ namespace CHClinic.Models.Views
         public History History { get; set; }
         public Generalities Generalities { get; set; }
         public PhyicalExamination Examination{ get; set; }
+    }
+
+    public class PatientHistoryData
+    {
+        public Person Person { get; set; }
+        public Complaint Complaint { get; set; }
+        public History History { get; set; }
+        public Generalities Generalities { get; set; }
+        public PhyicalExamination Examination { get; set; }
+        public ICollection<VisitEditData> VisitHistorys { get; set; }
     }
 
     public class VisitListData
@@ -32,12 +44,18 @@ namespace CHClinic.Models.Views
         public ICollection<PrescribedMed> Meds { get; set; }
     }
 
+   public class VisitEditData
+    {
+        public Visit Visit { get; set; }
+        public ICollection<PrescribedMed> Meds { get; set; }
+    }
 
     public class RegularVisitData
     {
         
 
         public int VisitId { get; set; } //PK
+     
         [Required]
         public int PersonId { get; set; } //FK
 
@@ -65,40 +83,17 @@ namespace CHClinic.Models.Views
         [Display(Name = "Is Visit Billable")]
         public bool VisitBillable { get; set; }
 
-
-        //Invoice Info
-        public int InvoiceId { get; set; } //PK
-        
+               
         [Display(Name = "Visit Charge")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
-        public decimal VisitCharge { get; set; }
-
-        [Display(Name = "Medicene Charge")]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "money")]
-        public decimal MedCharge { get; set; }
-
-        [Display(Name = "Other Charges")]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "money")]
-        public decimal OtherCharges { get; set; }
-
-        [Display(Name = "Paid Amount")]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "money")]
-        public decimal Paid { get; set; }
-
-        [Display(Name = "UnPaid Amount")]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "money")]
-        public decimal Dues { get; set; }
-        public string Remarks { get; set; }
-
-        
+        public decimal VisitCharge { get; set; }            
 
         public List<PrescribedMed> PrescribedMeds { get; set; }
         
-
+        public RegularVisitData()
+        {
+            PrescribedMeds = new List<PrescribedMed>();
+        }
     }
 }

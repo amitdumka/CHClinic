@@ -1,12 +1,11 @@
 ﻿@model CHClinic.Models.Data.Complaint
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Details";
 }
 
-<h2>Delete</h2>
+<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Complaint</h4>
     <hr />
@@ -68,15 +67,8 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-    <input type="submit" value="Delete" class="btn btn-default" /> |
-    @*@Html.ActionLink("Back to List", "Index")*@
-    <a href="javascript: history.go(-1)">Go Back</a>
 </div>
-    }
-</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PersonId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

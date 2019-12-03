@@ -33,12 +33,12 @@
         <th>
             @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().NextVisit)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Billable)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().VisitBillable)
-            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().Billable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().VisitBillable)
+        </th>
         <th>
             @Html.DisplayNameFor(model => Model.Visits.FirstOrDefault().VisitCharge)
         </th>
@@ -52,44 +52,44 @@
         {
             selectedRow = "success";
         }
-        <tr class="@selectedRow" valign="top">
-            <td>
-                @Html.DisplayFor(modelItem => item.VisitDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Person.OPDRegistrationID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Person.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Person.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Problems)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Revisit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NextVisit)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Billable)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VisitBillable)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.VisitCharge)
-            </td>
-            <td>
-                @Html.ActionLink("Select", "Index", new { id = item.VisitId }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.VisitId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.VisitId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.VisitId })
-            </td>
-        </tr>
+<tr class="@selectedRow" valign="top">
+    <td>
+        @Html.DisplayFor(modelItem => item.VisitDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.OPDRegistrationID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.FullName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Person.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Problems)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Revisit)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NextVisit)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Billable)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VisitBillable)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VisitCharge)
+    </td>
+    <td>
+        @Html.ActionLink("Select", "Index", new { id = item.VisitId }) |
+        @Html.ActionLink("Edit", "Edit", new { id = item.VisitId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.VisitId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.VisitId })
+    </td>
+</tr>
     }
 
 </table>
@@ -97,23 +97,17 @@
 
 @if (Model.Meds != null)
 {
-    if (Model.Meds.Count() > 0)
-    {
-        <h3>Prescribed Med for @Model.Meds.FirstOrDefault().Visit.Person.FullName</h3>
-    }
-
+    <h3>Prescribed Med for Selected Person</h3>
     <table class="table">
         <tr>
-            <th>SN</th>
+            <th></th>
             <th>Name</th>
             <th>Power</th>
             <th>No of Times</th>
             <th>Quantity</th>
             <th>Remarks</th>
         </tr>
-        @{
-            int j = 0;
-        }
+
         @foreach (var item in Model.Meds)
         {
             string selectedRow = "";
@@ -121,11 +115,9 @@
             {
                 selectedRow = "success";
             }
-            j++;
             <tr class="@selectedRow">
                 <td>
-                    @*@Html.ActionLink("Select", "Index", new { id = item.VisitId })*@
-                    @j
+                    @Html.ActionLink("Select", "Index", new { id = item.VisitId })
                 </td>
                 <td>
                     @item.MedicineName
@@ -143,7 +135,6 @@
                     @item.Remarks
                 </td>
             </tr>
-           
         }
 
     </table>

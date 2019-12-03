@@ -19,11 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HistoryComplaint)
+            @Html.DisplayNameFor(model => model.HistoryComplain)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HistoryComplaint)
+            @Html.DisplayFor(model => model.HistoryComplain)
         </dd>
 
         <dt>
@@ -70,5 +70,6 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="javascript: history.go(-1)">Go Back</a>
 </p>

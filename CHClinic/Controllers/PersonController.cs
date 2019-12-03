@@ -83,11 +83,24 @@ namespace CHClinic.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Person person = db.People.Find(id);
+            
             if (person == null)
             {
                 return HttpNotFound();
             }
-            return View(person);
+            ViewBag.PersonId = person.PersonId;
+            List<VisitEditData> visitData = new List<VisitEditData>();
+            var visitList = db.Visits.Where(c => c.PersonId == id).OrderByDescending(c => c.VisitDate).Include(c => c.PrescribedMeds);
+            foreach (var item in visitList)
+            {
+                visitData.Add(new VisitEditData() { Visit = item, Meds = item.PrescribedMeds });
+            }
+            PatientHistoryData historyData = new PatientHistoryData() {
+                Person = person, Complaint = person.Complaint, Examination = person.Examination, Generalities = person.Generalities,
+                History = person.History, VisitHistorys = visitData
+            };
+
+            return View(historyData);
         }
 
         // GET: Person/Create
