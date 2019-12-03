@@ -36,7 +36,7 @@ namespace CHClinic.Controllers
             viewModel.Visits = db.Visits.Include(v => v.Person)
                  .Include(i => i.Invoices)
                  .Include(i => i.PrescribedMeds)
-                .OrderBy(p => p.Person.LastName);
+                .OrderByDescending(i => i.VisitDate);
 
             if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {
@@ -68,9 +68,7 @@ namespace CHClinic.Controllers
 
 
             return View(viewModel);
-            //Old
-            //var visits = db.Visits.Include(v => v.Person);
-            //return View(visits.ToList());
+
         }
 
         // GET: Visit/Details/5
@@ -88,64 +86,86 @@ namespace CHClinic.Controllers
             return View(visit);
         }
 
-        public ActionResult CreateMeds()
+        // GET: RegularVisit/Create
+        public ActionResult Create()
         {
             ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
-            //this.PopulateDropDownList();
-            return View();
+            var ViewModel = new RegularVisitData();
+            ViewModel.PrescribedMeds = new List<PrescribedMed> { new PrescribedMed { VisitId = 0, MedicineName = "", Power = "", NoOfTime = "", Quantity = "", Remarks = "" } };
+
+            return View(ViewModel);
         }
 
+        // POST: RegularVisit/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateMeds([Bind(Include = "VisitId,PersonId,VisitDate,Problems,Revisit,NextVisit,Billable,VisitBillable")] Visit visit)
+        public ActionResult Create(RegularVisitData todayVisit)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    Visit visit = new Visit()
+                    {
+                        PersonId = todayVisit.PersonId,
+                        Problems = todayVisit.Problems,
+                        Billable = todayVisit.Billable,
+                        NextVisit = todayVisit.NextVisit,
+                        Revisit = todayVisit.Revisit,
+                        VisitBillable = todayVisit.VisitBillable,
+                        VisitCharge = todayVisit.VisitCharge,
+                        VisitDate = todayVisit.VisitDate
+                    };
+                    foreach (var med in todayVisit.PrescribedMeds)
+                    {
+                        visit.PrescribedMeds.Add(med);
+                    }
+
+                    if (visit.Revisit)
+                    {
+                        Appointment apps = db.Appointments.Where(c => c.PersonId == visit.PersonId).OrderByDescending(c => c.Date).FirstOrDefault();
+
+                        if (apps != null)
+                        {
+                            apps.VisitDate = visit.VisitDate;
+                            db.Entry(apps).State = EntityState.Modified;
+                        }
+                    }
+
+                    if (visit.VisitCharge > 0)
+                    {
+                        Income income = new Income()
+                        {
+                            Amount = visit.VisitCharge,
+                            IncomeDate = visit.VisitDate
+                        };
+                        db.Incomes.Add(income);
+                    }
+                    if (visit.NextVisit != null)
+                    {
+                        Appointment apps = new Appointment()
+                        {
+                            Date = (DateTime)(visit.NextVisit),
+                            PersonId = visit.PersonId
+                        };
+                        db.Appointments.Add(apps);
+
+                    }
                     db.Visits.Add(visit);
+
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
+                ViewBag.PersonId = new SelectList(db.People, "PersonId", "PersonId", todayVisit.PersonId);
+                return View(todayVisit);
+
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch
             {
-                //Log the error (uncomment dex variable name and add a line here to write a log.)
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                return View();
             }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again, Some Error Happened.");
-            }
-            
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID", visit.PersonId);
-            return View(visit);
         }
 
-        // GET: Visit/Create
-        public ActionResult Create()
-        {
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
-            return View();
-        }
-
-        // POST: Visit/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VisitId,PersonId,VisitDate,Problems,Revisit,NextVisit,Billable,VisitBillable")] Models.Views.VisitCreateData visit)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Visits.Add(visit.Visit);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.PersonId = new SelectList(db.People, "PersonId", "PersonId", visit.Visit.PersonId);
-            return View(visit);
-        }
 
         // GET: Visit/Edit/5
         public ActionResult Edit(int? id)
