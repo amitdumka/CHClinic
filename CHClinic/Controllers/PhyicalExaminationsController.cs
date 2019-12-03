@@ -69,7 +69,7 @@ namespace CHClinic.Controllers
         }
 
         // GET: PhyicalExaminations/Edit/5
-        public ActionResult Edit(int? id, string returnPage)
+        public ActionResult Edit(int? id/*, string returnPage*/)
         {
             ViewBag.returnUrl = Request.UrlReferrer;
             if (id == null)
@@ -103,7 +103,7 @@ namespace CHClinic.Controllers
         }
 
         // GET: PhyicalExaminations/Delete/5
-        public ActionResult Delete(int? id, string returnPage)
+        public ActionResult Delete(int? id /*,string returnPage*/)
         {
             ViewBag.returnUrl = Request.UrlReferrer;
             if (id == null)

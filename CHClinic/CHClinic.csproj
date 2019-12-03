@@ -172,6 +172,7 @@
     <Content Include="Res\HelpFulInfo.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include=".editorconfig" />
     <None Include="Properties\PublishProfiles\CHClinic - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

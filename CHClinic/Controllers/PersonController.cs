@@ -26,9 +26,11 @@ namespace CHClinic.Controllers
             opdList.AddRange(opdQry.Distinct());
             ViewBag.opdRegistrationid = new SelectList(opdList);
 
-            var viewModel = new PatientListData();
-            viewModel.People = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
-                .OrderBy(p => p.LastName);
+            var viewModel = new PatientListData
+            {
+                People = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                .OrderBy(p => p.LastName)
+            };
 
             if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {

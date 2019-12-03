@@ -30,13 +30,15 @@ namespace CHClinic.Controllers
 
 
 
-            var viewModel = new VisitListData();
-            viewModel.People = db.People.Include(p => p.Visits).OrderBy(p => p.LastName);
+            var viewModel = new VisitListData
+            {
+                People = db.People.Include(p => p.Visits).OrderBy(p => p.LastName),
 
-            viewModel.Visits = db.Visits.Include(v => v.Person)
+                Visits = db.Visits.Include(v => v.Person)
                  .Include(i => i.Invoices)
                  .Include(i => i.PrescribedMeds)
-                .OrderByDescending(i => i.VisitDate);
+                .OrderByDescending(i => i.VisitDate)
+            };
 
             if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {
@@ -90,8 +92,10 @@ namespace CHClinic.Controllers
         public ActionResult Create()
         {
             ViewBag.PersonId = new SelectList(db.People, "PersonId", "OPDRegistrationID");
-            var ViewModel = new RegularVisitData();
-            ViewModel.PrescribedMeds = new List<PrescribedMed> { new PrescribedMed { VisitId = 0, MedicineName = "", Power = "", NoOfTime = "", Quantity = "", Remarks = "" } };
+            var ViewModel = new RegularVisitData
+            {
+                PrescribedMeds = new List<PrescribedMed> { new PrescribedMed { VisitId = 0, MedicineName = "", Power = "", NoOfTime = "", Quantity = "", Remarks = "" } }
+            };
 
             return View(ViewModel);
         }
