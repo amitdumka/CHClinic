@@ -125,7 +125,7 @@ namespace CHClinic.Controllers
                         Income income = new Income()
                         {
                             Amount = visit.VisitCharge,
-                            Date = visit.VisitDate
+                            IncomeDate = visit.VisitDate
                         };
                         db.Incomes.Add(income);
                     }

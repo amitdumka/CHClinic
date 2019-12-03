@@ -1,4 +1,6 @@
-﻿@{
+﻿@model CHClinic.Models.Views.DashBoardInfoData
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -14,6 +16,29 @@
         <p>
             Kindly Click to book appointment with Dr. Shyam Manohar.
         </p>
+        @if (Model.Appointments != null && Model.Appointments.Count > 0)
+        {
+            <div>
+                <p class="text-primary"><b> List of Next Appointments</b></p>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th class="col-lg-6">Full Name</th>
+                    </tr>
+                    @foreach (var item in Model.Appointments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.Label(item.Date.ToString("dd/MM/yyyy"))
+                            </td>
+                            <td class="col-lg-6 text-success">
+                                @item.Person.FullName
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
         <p><a class="btn btn-default" href="http://www.nih.nic.in/">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
@@ -23,9 +48,9 @@
     </div>
     <div class="col-md-4">
         <h2>Balance Sheet</h2>
-        <p>Today Earning Rs. 10000.</p>
-        <p>This Month Earning Rs. 100000.</p>
-        <p>This Year Earning Rs. 1100000.</p>
+        <p class="text-primary">Today Earning      <b>Rs. @Model.TodayEarning</b> .</p>
+        <p class="text-success">This Month Earning <b>Rs. @Model.MonthlyEarning</b> .</p>
+        <p class="text-danger">This Year Earning   <b>Rs. @Model.YearlyEarning</b> .</p>
         <p><a class="btn btn-default" href="http://www.nih.nic.in/">Learn more &raquo;</a></p>
     </div>
 </div>

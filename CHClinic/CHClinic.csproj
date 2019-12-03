@@ -138,7 +138,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComplaintsController.cs" />
-    <Compile Include="Controllers\Complaints_oldController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\GeneralitiesController.cs" />
     <Compile Include="Controllers\HistoriesController.cs" />
@@ -221,11 +220,6 @@
     <Content Include="Views\Person\Details.cshtml" />
     <Content Include="Views\Person\Edit.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
-    <Content Include="Views\oldcompalins\Create.cshtml" />
-    <Content Include="Views\oldcompalins\Delete.cshtml" />
-    <Content Include="Views\oldcompalins\Details.cshtml" />
-    <Content Include="Views\oldcompalins\Edit.cshtml" />
-    <Content Include="Views\oldcompalins\Index.cshtml" />
     <Content Include="Views\Histories\Create.cshtml" />
     <Content Include="Views\Histories\Delete.cshtml" />
     <Content Include="Views\Histories\Details.cshtml" />
@@ -256,7 +250,6 @@
     <Content Include="Views\RegularVisit\Create.cshtml" />
     <Content Include="Views\RegularVisit\Index.cshtml" />
     <Content Include="Views\RegularVisit\Edit.cshtml" />
-    <Content Include="Views\Person\Details - Copy.cshtml" />
     <Content Include="Views\Complaints\Create.cshtml" />
     <Content Include="Views\Complaints\Delete.cshtml" />
     <Content Include="Views\Complaints\Details.cshtml" />

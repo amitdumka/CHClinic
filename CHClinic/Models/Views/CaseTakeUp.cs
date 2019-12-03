@@ -8,6 +8,15 @@ using System.Web;
 
 namespace CHClinic.Models.Views
 {
+
+    public class DashBoardInfoData
+    {
+        public decimal? TodayEarning { get; set; }
+        public decimal? MonthlyEarning { get; set; }
+        public decimal? YearlyEarning { get; set; }
+        public List<Appointment> Appointments { get; set; }
+
+    }
     public class PatientListData
     {
         public IEnumerable<Person> People { get; set; }

@@ -337,7 +337,7 @@ namespace CHClinic.Models.Data
     public class Income
     {
         public int IncomeId { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime? IncomeDate { get; set; }
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
