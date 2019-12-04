@@ -20,7 +20,7 @@ namespace CHClinic.Models.Data
         public string OPDRegistrationID { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
         public DateTime? DateofRecord { get; set; }
 
@@ -51,10 +51,10 @@ namespace CHClinic.Models.Data
         public string Occupation { get; set; }
         public string Religion { get; set; }
 
-        public virtual History History { get; set; }
-        public virtual Complaint Complaint { get; set; }
+        public virtual History PatHistory { get; set; }
+        public virtual Complaint PatComplaint { get; set; }
         public virtual PhyicalExamination Examination { get; set; }
-        public virtual Generalities Generalities { get; set; }
+        public virtual Generalities PatGeneralities { get; set; }
 
         public virtual ICollection<Visit> Visits { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
@@ -223,7 +223,7 @@ namespace CHClinic.Models.Data
         public int PersonId { get; set; } //FK
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Visit Date")]
         public DateTime? VisitDate { get; set; }
 
@@ -237,7 +237,7 @@ namespace CHClinic.Models.Data
         public bool Revisit { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Next Visit Date")]
         public DateTime? NextVisit { get; set; }
 
@@ -351,7 +351,7 @@ namespace CHClinic.Models.Data
         public string Particulars { get; set; }
 
         [Required, DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? Date { get; set; }
 
         [Required]
@@ -393,6 +393,7 @@ namespace CHClinic.Models.Data
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal CostPrice { get; set; }
+        
         [Display(Name = "Selling Price")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]

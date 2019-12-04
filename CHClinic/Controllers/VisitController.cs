@@ -42,7 +42,7 @@ namespace CHClinic.Controllers
 
             if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {
-                var people = from p in db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                var people = from p in db.People.Include(p => p.PatComplaint).Include(p => p.Examination).Include(p => p.PatGeneralities).Include(p => p.PatHistory)
                 .OrderBy(p => p.LastName)
                              select p;
 
@@ -123,6 +123,8 @@ namespace CHClinic.Controllers
                     foreach (var med in todayVisit.PrescribedMeds)
                     {
                         visit.PrescribedMeds.Add(med);
+                        AddMedicineNameIfNotExist(db, med.MedicineName, med.Power);
+
                     }
 
                     if (visit.Revisit)
@@ -245,6 +247,16 @@ namespace CHClinic.Controllers
                                    orderby d.OPDRegistrationID
                                    select d;
             ViewBag.PersonId = new SelectList(Query, "PersonId", "PersonId", selectedPerson);
+        }
+
+        private void AddMedicineNameIfNotExist(CHClinic.Models.ClinicDBContext dbc, string medName, string medPower)
+        {
+            int ctr = dbc.Medicines.Where(c => c.MedicineName == medName && c.Power == medPower).Count();
+            if (ctr <= 0)
+            {
+                Medicine medicine = new Medicine() { MedicineName = medName, Power = medPower };
+                dbc.Medicines.Add(medicine);
+            }
         }
     }
 }

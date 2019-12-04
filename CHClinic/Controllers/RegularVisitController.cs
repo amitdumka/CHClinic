@@ -39,7 +39,7 @@ namespace CHClinic.Controllers
 
             if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {
-                var people = from p in db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                var people = from p in db.People.Include(p => p.PatComplaint).Include(p => p.Examination).Include(p => p.PatGeneralities).Include(p => p.PatHistory)
                 .OrderBy(p => p.LastName)
                              select p;
 

@@ -28,13 +28,13 @@ namespace CHClinic.Controllers
 
             var viewModel = new PatientListData
             {
-                People = db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                People = db.People.Include(p => p.PatComplaint).Include(p => p.Examination).Include(p => p.PatGeneralities).Include(p => p.PatHistory)
                 .OrderBy(p => p.LastName)
             };
 
             if (!String.IsNullOrEmpty(searchString) || !String.IsNullOrEmpty(opdRegistrationid))
             {
-                var people = from p in db.People.Include(p => p.Complaint).Include(p => p.Examination).Include(p => p.Generalities).Include(p => p.History)
+                var people = from p in db.People.Include(p => p.PatComplaint).Include(p => p.Examination).Include(p => p.PatGeneralities).Include(p => p.PatHistory)
                 .OrderBy(p => p.LastName)
                              select p;
 
@@ -55,16 +55,16 @@ namespace CHClinic.Controllers
             {
                 ViewBag.PersonId = id.Value;
                 viewModel.History = viewModel.People.Where(
-                    i => i.PersonId == id.Value).Single().History;
+                    i => i.PersonId == id.Value).Single().PatHistory;
 
                 viewModel.Complaint = viewModel.People.Where(
-                    i => i.PersonId == id.Value).Single().Complaint;
+                    i => i.PersonId == id.Value).Single().PatComplaint;
 
                 viewModel.Examination = viewModel.People.Where(
                                     i => i.PersonId == id.Value).Single().Examination;
 
                 viewModel.Generalities = viewModel.People.Where(
-                                    i => i.PersonId == id.Value).Single().Generalities;
+                                    i => i.PersonId == id.Value).Single().PatGeneralities;
 
 
             }
@@ -98,8 +98,8 @@ namespace CHClinic.Controllers
                 visitData.Add(new VisitEditData() { Visit = item, Meds = item.PrescribedMeds });
             }
             PatientHistoryData historyData = new PatientHistoryData() {
-                Person = person, Complaint = person.Complaint, Examination = person.Examination, Generalities = person.Generalities,
-                History = person.History, VisitHistorys = visitData
+                Person = person, Complaint = person.PatComplaint, Examination = person.Examination, Generalities = person.PatGeneralities,
+                History = person.PatHistory, VisitHistorys = visitData
             };
 
             return View(historyData);

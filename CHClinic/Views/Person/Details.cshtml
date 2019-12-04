@@ -585,80 +585,28 @@
                 <th>
                     @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.VisitDate)
                 </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.Person.OPDRegistrationID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.Person.FullName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.Person.City)
-                    </th>*@
                 <th>
                     @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.Problems)
                 </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.Revisit)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.NextVisit)
-                    </th>
-                    <th>
-                            @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.Billable)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.VisitBillable)
-                        </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.VisitHistorys.FirstOrDefault().Visit.VisitCharge)
-                    </th>
-                    <th></th>*@
+                <th></th>
             </tr>
 
             @foreach (var item in Model.VisitHistorys)
             {
-                string selectedRow = "";
-                if (item.Visit.VisitId == ViewBag.VisitId)
-                {
-                    selectedRow = "success";
-                }
-                <tr class="@selectedRow" valign="top">
+
+                <tr valign="top">
                     <td>
                         @Html.DisplayFor(modelItem => item.Visit.VisitDate)
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Visit.Person.OPDRegistrationID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Visit.Person.FullName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Visit.Person.City)
-                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.Visit.Problems)
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Visit.Revisit)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Visit.NextVisit)
-                        </td>
-                        <td>
-                                @Html.DisplayFor(modelItem => item.Visit.Billable)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Visit.VisitBillable)
-                            </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Visit.VisitCharge)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Select", "Index", new { id = item.Visit.VisitId }) |
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Visit.VisitId }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Visit.VisitId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Visit.VisitId })
-                        </td>*@
+                    <td>
+                        @*@Html.ActionLink("Select", "Index", "Visit", new { id = item.Visit.VisitId },null) |*@
+                        @Html.ActionLink("Edit", "Edit", "Visit", new { id = item.Visit.VisitId },null) |
+                        @Html.ActionLink("Details", "Details", "Visit", new { id = item.Visit.VisitId },null) |
+                        @Html.ActionLink("Delete", "Delete", "Visit", new { id = item.Visit.VisitId },null)
+                    </td>
                 </tr>
             }
 
@@ -721,12 +669,17 @@
         </table>
 
     }
+    else
+    {
+        <p>@Html.ActionLink("Add Visit", "Create", "Visit", new { id = Model.Person.PersonId },null)</p>
+    }
+
 }
 
 
 
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Person.PersonId }) |
+    @Html.ActionLink("Edit Patient Record", "Edit", new { id = Model.Person.PersonId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
