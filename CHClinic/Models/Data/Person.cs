@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace CHClinic.Models.Data
 {
     public enum Genders { Male, Female, Transgender }
-    public enum BloodGroups { Ap, Bp, Op, An, Bn, On, ABp, ABn }
+    public enum BloodGroups { APositive, BPositive, OPositive, ANegative, BNegative, ONegative, ABPositive, ABNegative }
     public enum Unit { Pcs, Lts, Ml, Gms, Pcks }
     public enum PayMode { Cash, Card, BankTransfer, Cheque, DD }
 
